@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#172c42">
+<meta name="description" content="AetherField: an interactive finite-element heat-transfer and electrostatics workbench. Real meshes, real solvers, WebGPU rendering and compute.">
+<title>AetherField — Multiphysics Workbench</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%23182e44'/%3E%3Cpath d='M9 30L20 9l11 21M14 23h12' fill='none' stroke='%2377dfdd' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+ <header class="titlebar">
+  <div class="brand"><span class="brand-mark">Λ</span><span>Aether<span class="brand-light">Field</span><span class="edition">MULTIPHYSICS</span></span></div>
+  <div class="quick-actions"><button data-action="new" title="New project">＋</button><button data-action="open" title="Open project">▱</button><button data-action="save" title="Save project · Ctrl+S">▣</button><span></span><button data-action="undo" id="undo" title="Undo · Ctrl+Z">↶</button><button data-action="redo" id="redo" title="Redo · Ctrl+Shift+Z">↷</button></div>
+  <div id="document-title">Perforated resistive heater</div>
+  <div class="title-right"><span class="local-dot"></span><span id="save-status">Local project</span><button data-action="help" title="Help and numerical scope">?</button></div>
+ </header>
+ <nav class="ribbon-tabs" aria-label="Workspace sections">
+  <button class="file-tab" data-action="open">File</button>
+  <button class="active" data-tab="home">Home</button><button data-tab="geometry">Geometry</button><button data-tab="materials">Materials</button><button data-tab="physics">Physics</button><button data-tab="mesh">Mesh</button><button data-tab="study">Study</button><button data-tab="results">Results</button>
+  <span class="spacer"></span><span class="dimension-badge">2D <span>COMPONENT</span></span>
+ </nav>
+ <section class="ribbon" id="ribbon" aria-label="Commands"></section>
+ <main class="workspace">
+  <aside class="tree-panel panel">
+   <div class="panel-heading"><span>Model Builder</span><button data-action="collapse-tree" title="Toggle model tree details">⌄</button></div>
+   <div class="tree-search"><span>⌕</span><input id="tree-search" aria-label="Filter model tree" placeholder="Search model…"><kbd>⌘ K</kbd></div>
+   <div class="tree" id="model-tree" role="tree"></div>
+   <div class="model-footer"><span class="tiny-orbit">◉</span><div><strong>Finite element model</strong><span>SI units · P1 triangles · local only</span></div></div>
+  </aside>
+  <div class="splitter" id="tree-splitter" title="Resize Model Builder"></div>
+  <aside class="settings-panel panel" id="settings-panel">
+   <div class="panel-heading"><span>Settings</span><button data-action="toggle-settings" title="Hide settings">×</button></div>
+   <div id="settings"></div>
+  </aside>
+  <div class="splitter" id="settings-splitter" title="Resize Settings"></div>
+  <section class="main-panel">
+   <div class="view-tabs"><button class="active" data-view="results">◈ <span id="view-tab-label">Temperature (ht)</span></button><button data-view="geometry">◇ Geometry</button><button data-view="mesh">△ Mesh</button><span class="spacer"></span><button class="settings-toggle" data-action="toggle-settings" title="Show settings">☷</button><span class="render-status" id="render-status">Initializing renderer</span></div>
+   <div class="graphics-toolbar">
+    <div class="tool-group"><button data-tool="select" title="Select / move / resize geometry · S">↖</button><button data-tool="boundary" title="Select a boundary · B">▱</button><button data-tool="probe" class="active" title="Place a point probe · P">⊙</button><button data-tool="pan" title="Pan · Space / middle drag">✥</button></div>
+    <div class="tool-group"><button data-action="fit" title="Zoom to fit · F">⛶</button><button data-action="zoom-in" title="Zoom in">＋</button><button data-action="zoom-out" title="Zoom out">−</button></div>
+    <select id="field-select" aria-label="Result field"></select>
+    <div class="tool-group"><button data-action="toggle-mesh" id="mesh-toggle" title="Show element edges">△</button><button data-action="toggle-contours" id="contour-toggle" title="Show contours">≋</button><button data-action="toggle-vectors" id="vector-toggle" title="Show field vectors">↗</button></div>
+    <span class="spacer"></span><button data-action="png" title="Export plot PNG">▣</button>
+   </div>
+   <div class="viewport" id="viewport">
+    <canvas id="gpu-canvas" aria-label="Computed finite-element field"></canvas><canvas id="overlay-canvas" tabindex="0" aria-label="Interactive geometry and result view"></canvas>
+    <div class="plot-heading"><div class="plot-eyebrow" id="plot-eyebrow">STUDY 1 / STATIONARY</div><h1 id="plot-title">Temperature</h1><p id="plot-subtitle">Computing the finite-element solution…</p></div>
+    <div class="result-pill" id="result-pill"><span class="pulse"></span>Computing</div>
+    <div class="tool-hint" id="tool-hint">Click the model to add a probe · scroll to zoom · middle-drag to pan</div>
+    <div class="probe-tooltip" id="probe-tooltip" hidden></div>
+    <div id="busy-overlay" class="busy-overlay" hidden><div class="busy-track"><div></div></div><span id="busy-text">Assembling system…</span><button data-action="cancel">Cancel</button></div>
+   </div>
+   <div class="framebar" id="framebar"><span class="dataset-label">DATASET</span><select id="run-select" aria-label="Sweep solution"></select><span class="spacer"></span><button data-action="play" id="play-button" title="Play transient results">▶</button><input type="range" id="time-slider" min="0" max="0" value="0" aria-label="Time frame"><span id="time-label">Stationary solution</span></div>
+   <div class="horizontal-splitter" id="bottom-splitter" title="Resize diagnostics"></div>
+   <section class="diagnostics" id="diagnostics">
+    <div class="diagnostic-tabs"><button data-bottom="log" class="active">Messages <span id="message-count">0</span></button><button data-bottom="convergence">Convergence</button><button data-bottom="table">Data</button><button data-bottom="probes">Probes</button><button data-bottom="sweep">Sweep</button><button data-bottom="benchmarks">Validation</button><span class="spacer"></span><button data-action="clear-log" title="Clear messages">⊘</button></div>
+    <div id="diagnostic-content"></div>
+   </section>
+  </section>
+ </main>
+ <footer class="statusbar"><span class="ready-dot" id="ready-dot"></span><span id="status-text">Ready</span><span class="status-separator"></span><span id="mesh-status">No mesh</span><span class="spacer"></span><span id="coordinate-status">x: — &nbsp; y: —</span><span class="status-separator"></span><span>Length: mm</span><span class="status-separator"></span><span id="compute-status">Float64 FEM</span></footer>
+</div>
+<input type="file" id="project-file" accept=".json,.afield" hidden>
+<dialog id="modal"><div class="modal-head"><h2 id="modal-title"></h2><button data-action="close-modal" title="Close dialog">×</button></div><div id="modal-content"></div></dialog>
+<div id="toast" role="status" hidden></div>
+<script type="module" src="app.js"></script>
+</body>
+</html>

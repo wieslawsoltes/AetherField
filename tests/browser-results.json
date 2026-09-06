@@ -1,0 +1,112 @@
+{
+  "tests": [
+    {
+      "name": "Startup computes two-way Joule heating and plots recorded residuals",
+      "passed": true,
+      "seconds": 0.143350297000012,
+      "metric": {
+        "nodes": 1157,
+        "elements": 2140,
+        "Tmax_K": 350.1463423466612,
+        "power_W": 4.28151676128702,
+        "residual": 9.534861119832824e-10,
+        "plotSamples": 144
+      }
+    },
+    {
+      "name": "Interactive field and overlay selection",
+      "passed": true,
+      "seconds": 0.7938811940000221,
+      "metric": "Six computed fields, contours, mesh and vector overlays"
+    },
+    {
+      "name": "Barycentric probe placement rejects points inside holes",
+      "passed": true,
+      "seconds": 0.12767131399999698,
+      "metric": {
+        "temperature_K": 323.4601851360972,
+        "holeRejected": true
+      }
+    },
+    {
+      "name": "Real result downloads and project file round trip",
+      "passed": true,
+      "seconds": 0.9323283530000026,
+      "metric": "Full nodal CSV, VTK, project download/upload, persistent identities"
+    },
+    {
+      "name": "Pick a hole boundary, impose convection, recompute",
+      "passed": true,
+      "seconds": 0.9418564200000219,
+      "metric": {
+        "newTmax_K": 349.7796963939446,
+        "selector": "hole1:curve"
+      }
+    },
+    {
+      "name": "Geometry editing and solution invalidation",
+      "passed": true,
+      "seconds": 0.6034492420000106,
+      "metric": "Pointer construction, drag, delete, atomic undo/redo, actual remeshing"
+    },
+    {
+      "name": "Thermal slab model library workflow",
+      "passed": true,
+      "seconds": 0.3150258149999843,
+      "metric": {
+        "midpoint_K": 333.14999925736544
+      }
+    },
+    {
+      "name": "Electrostatic model library workflow",
+      "passed": true,
+      "seconds": 0.3163821329999905,
+      "metric": {
+        "V": 4.9999999744248615,
+        "energy_J": 1.0625025375360028e-12,
+        "E_V_m": 100.00000308428457
+      }
+    },
+    {
+      "name": "Implicit thermal transient, frame slider and playback",
+      "passed": true,
+      "seconds": 1.1029230169999948,
+      "metric": {
+        "frames": 21,
+        "playedTime_s": 10
+      }
+    },
+    {
+      "name": "Parameter sweep and dataset switching",
+      "passed": true,
+      "seconds": 0.1971845379999877,
+      "metric": {
+        "power_W": [
+          0.05999999999999995,
+          0.2399999999999998
+        ],
+        "ratio": 4.0
+      }
+    },
+    {
+      "name": "Analytical suite runs inside the actual browser worker",
+      "passed": true,
+      "seconds": 0.9021374460000118,
+      "metric": {
+        "passed": 16,
+        "total": 16
+      }
+    }
+  ],
+  "environment": {
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/143.0.0.0 Safari/537.36",
+    "secureContext": false,
+    "webgpuExposed": false,
+    "renderBackend": "Canvas2D",
+    "computeDispatches": 0,
+    "mode": "about:blank"
+  },
+  "pageErrors": [],
+  "passed": 11,
+  "total": 11
+}

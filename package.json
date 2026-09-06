@@ -1,0 +1,17 @@
+{
+  "name": "aetherfield",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A dependency-free 2D finite-element multiphysics workbench with WebGPU acceleration",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node tests/run.mjs",
+    "build:standalone": "node tools/build-standalone.mjs",
+    "examples": "node tools/generate-examples.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}

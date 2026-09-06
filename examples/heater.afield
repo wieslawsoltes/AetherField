@@ -1,0 +1,177 @@
+{
+  "schema": 1,
+  "id": "aetherfield-example-heater",
+  "name": "Perforated resistive heater",
+  "parameters": [
+    {
+      "name": "Vapp",
+      "expression": "0.8[V]"
+    },
+    {
+      "name": "T0",
+      "expression": "293.15[K]"
+    },
+    {
+      "name": "L",
+      "expression": "100[mm]"
+    },
+    {
+      "name": "H",
+      "expression": "60[mm]"
+    }
+  ],
+  "shapes": [
+    {
+      "id": "plate",
+      "name": "Resistive plate",
+      "type": "rectangle",
+      "operation": "add",
+      "material": "alloy",
+      "x": "0[mm]",
+      "y": "0[mm]",
+      "width": "L",
+      "height": "H"
+    },
+    {
+      "id": "padL",
+      "name": "Left contact",
+      "type": "rectangle",
+      "operation": "add",
+      "material": "contact",
+      "x": "0[mm]",
+      "y": "0[mm]",
+      "width": "10[mm]",
+      "height": "H"
+    },
+    {
+      "id": "padR",
+      "name": "Right contact",
+      "type": "rectangle",
+      "operation": "add",
+      "material": "contact",
+      "x": "90[mm]",
+      "y": "0[mm]",
+      "width": "10[mm]",
+      "height": "H"
+    },
+    {
+      "id": "hole1",
+      "name": "Cooling bore 1",
+      "type": "circle",
+      "operation": "subtract",
+      "material": "alloy",
+      "x": "35[mm]",
+      "y": "30[mm]",
+      "radius": "9[mm]"
+    },
+    {
+      "id": "hole2",
+      "name": "Cooling bore 2",
+      "type": "circle",
+      "operation": "subtract",
+      "material": "alloy",
+      "x": "65[mm]",
+      "y": "30[mm]",
+      "radius": "9[mm]"
+    }
+  ],
+  "materials": [
+    {
+      "id": "alloy",
+      "name": "Resistive alloy · illustrative",
+      "k": "16[W/(m*K)]",
+      "rho": "7800[kg/m^3]",
+      "cp": "500[J/(kg*K)]",
+      "sigma": "12000[S/m]",
+      "epsilonR": "1",
+      "alpha": "0.002[1/K]",
+      "Tref": "T0",
+      "color": "#769db1"
+    },
+    {
+      "id": "contact",
+      "name": "Contact metal · illustrative",
+      "k": "100[W/(m*K)]",
+      "rho": "8900[kg/m^3]",
+      "cp": "385[J/(kg*K)]",
+      "sigma": "80000[S/m]",
+      "epsilonR": "1",
+      "alpha": "0[1/K]",
+      "Tref": "T0",
+      "color": "#c99560"
+    }
+  ],
+  "physics": {
+    "mode": "joule",
+    "thickness": "1[mm]",
+    "heatSource": "0[W/m^3]",
+    "spaceCharge": "0[C/m^3]",
+    "initial": "T0"
+  },
+  "boundaries": [
+    {
+      "id": "bcL",
+      "selector": "left",
+      "name": "Terminal / heat sink",
+      "heat": {
+        "type": "temperature",
+        "value": "T0",
+        "h": "10[W/(m^2*K)]",
+        "ambient": "T0"
+      },
+      "electric": {
+        "type": "potential",
+        "value": "Vapp"
+      }
+    },
+    {
+      "id": "bcR",
+      "selector": "right",
+      "name": "Ground / heat sink",
+      "heat": {
+        "type": "temperature",
+        "value": "T0",
+        "h": "10[W/(m^2*K)]",
+        "ambient": "T0"
+      },
+      "electric": {
+        "type": "potential",
+        "value": "0[V]"
+      }
+    }
+  ],
+  "mesh": {
+    "size": "2.5[mm]",
+    "maxNodes": 18000
+  },
+  "study": {
+    "type": "stationary",
+    "dt": "0.5[s]",
+    "end": "10[s]",
+    "tolerance": 1e-9,
+    "maxIterations": 3500,
+    "nonlinearTolerance": 1e-7,
+    "maxNonlinear": 70,
+    "relaxation": 0.8,
+    "backend": "auto",
+    "sweep": {
+      "enabled": false,
+      "parameter": "Vapp",
+      "values": "0.4[V], 0.6[V], 0.8[V], 1[V]"
+    }
+  },
+  "probes": [
+    {
+      "id": "probe0",
+      "name": "Center bridge",
+      "x": 0.05,
+      "y": 0.03
+    }
+  ],
+  "view": {
+    "field": "temperature",
+    "mesh": false,
+    "contours": true,
+    "vectors": false
+  }
+}

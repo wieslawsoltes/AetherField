@@ -1,0 +1,126 @@
+{
+  "passed": 16,
+  "total": 16,
+  "tests": [
+    {
+      "name": "Dimensional expressions, SI conversion and cyclic dependency detection",
+      "passed": true,
+      "elapsed": 1.5286620000000006,
+      "metric": "3 invalid/valid input paths checked"
+    },
+    {
+      "name": "Linear thermal patch test on unstructured triangles",
+      "passed": true,
+      "elapsed": 72.948508,
+      "error": 4.1465682443231344e-8,
+      "tolerance": 0.000002,
+      "unit": "K"
+    },
+    {
+      "name": "Poisson heat source: spatial L2 mesh convergence",
+      "passed": true,
+      "elapsed": 157.20004999999998,
+      "errors": [
+        0.0029725790823148207,
+        0.0006516650562796038,
+        0.00016492252680759984
+      ],
+      "order": 1.9823421662348257,
+      "tolerance": "order > 1.6"
+    },
+    {
+      "name": "Inward Neumann heat flux sign and analytical slope",
+      "passed": true,
+      "elapsed": 31.390138999999976,
+      "error": 2.493192141628242e-8,
+      "unit": "K"
+    },
+    {
+      "name": "Robin convection boundary and energy balance",
+      "passed": true,
+      "elapsed": 24.11776599999996,
+      "error": 2.018265377046191e-8,
+      "balance": -2.0360054975299136e-8,
+      "unit": "K / W"
+    },
+    {
+      "name": "Electrostatic parallel plate: potential, field and stored energy",
+      "passed": true,
+      "elapsed": 15.53099199999997,
+      "error": 9.778378107228036e-11,
+      "energyRelativeError": 4.561646895373816e-16,
+      "unit": "V"
+    },
+    {
+      "name": "Conforming dielectric interface: discontinuous permittivity",
+      "passed": true,
+      "elapsed": 18.47160600000001,
+      "error": 2.632372098076985e-11,
+      "unit": "V"
+    },
+    {
+      "name": "Transient heat: backward Euler against an analytical sine decay",
+      "passed": true,
+      "elapsed": 228.93320600000004,
+      "error": 0.00908464194315026,
+      "frames": 21,
+      "unit": "K·m"
+    },
+    {
+      "name": "Pure-Neumann transient heat conserves a uniform state",
+      "passed": true,
+      "elapsed": 24.690688000000023,
+      "error": 0,
+      "unit": "K"
+    },
+    {
+      "name": "Joule coupling: parabolic thermal solution and electrical power",
+      "passed": true,
+      "elapsed": 90.436286,
+      "error": 0.00025939666258967834,
+      "powerError": 2.220446049250313e-16,
+      "unit": "K·m / W"
+    },
+    {
+      "name": "Temperature-dependent conductivity: verified two-way coupling",
+      "passed": true,
+      "elapsed": 467.80653699999993,
+      "iterations": 9,
+      "residual": 8.331502164994521e-10,
+      "Tmax": 350.15174519308874
+    },
+    {
+      "name": "PSLG Boolean holes: polygonized-circle area and mesh quality",
+      "passed": true,
+      "elapsed": 119.24901999999997,
+      "error": 2.7755575615628914e-17,
+      "quality": 0.4762554177146849,
+      "nodes": 1157,
+      "elements": 2140
+    },
+    {
+      "name": "Overlapping polygon/rectangle union is constraint-conforming",
+      "passed": true,
+      "elapsed": 7.101002000000108,
+      "error": 3.552713678800501e-15
+    },
+    {
+      "name": "Stationary nullspace and conflicting essential values are rejected",
+      "passed": true,
+      "elapsed": 22.547735999999986,
+      "metric": "Both invalid systems rejected"
+    },
+    {
+      "name": "Parameter sweep recomputes fields and quadratic Joule power",
+      "passed": true,
+      "elapsed": 15.920600999999806,
+      "ratio": 4
+    },
+    {
+      "name": "Atomic project history and persistent identity",
+      "passed": true,
+      "elapsed": 0.5575639999999566,
+      "metric": "Undo / redo round trip"
+    }
+  ]
+}

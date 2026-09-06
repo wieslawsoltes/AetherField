@@ -1,0 +1,677 @@
+{
+  "backend": "Float64 CPU",
+  "generatedAt": "2026-09-06T21:49:03.791Z",
+  "models": {
+    "heater": [
+      {
+        "case": null,
+        "nodes": 1157,
+        "elements": 2140,
+        "minQuality": 0.4762554177146849,
+        "meanQuality": 0.9654270640243647,
+        "frames": 1,
+        "summary": {
+          "temperature": {
+            "min": 293.15,
+            "max": 350.1463423466612
+          },
+          "potential": {
+            "min": 0,
+            "max": 0.8
+          },
+          "joulePower": 4.28151676128702,
+          "electricEnergy": 1.6631533792710395e-15,
+          "maxHeatFlux": 38227.2843246156,
+          "maxElectricField": 16.921642528671132
+        },
+        "nonlinear": {
+          "iterations": 9,
+          "residual": 9.534861119832824e-10,
+          "change": 0
+        },
+        "linearIterations": 937,
+        "maxAcceptedLinearResidual": 9.656113531551772e-10,
+        "lastSolves": [
+          {
+            "label": "Electric currents · Picard 9",
+            "source": 0,
+            "inwardFlux": 0,
+            "essentialReaction": 3.44058115331336e-11,
+            "convectionOut": 0,
+            "storage": 0,
+            "balance": 3.44058115331336e-11,
+            "freeResidualSum": -3.426398748063164e-11,
+            "relativeResidual": 9.534861119832824e-10,
+            "dofs": 1107,
+            "nonzeros": 7395
+          },
+          {
+            "label": "Heat transfer · Picard 9",
+            "source": 4.281516761287028,
+            "inwardFlux": 0,
+            "essentialReaction": -4.281517831194086,
+            "convectionOut": 0,
+            "storage": 0,
+            "balance": -0.0000010699070580599823,
+            "freeResidualSum": 0.0000010699078186617283,
+            "relativeResidual": 7.464477779550675e-10,
+            "dofs": 1107,
+            "nonzeros": 7395
+          }
+        ],
+        "probes": [
+          {
+            "id": "probe0",
+            "name": "Center bridge",
+            "x": 0.05,
+            "y": 0.03,
+            "samples": [
+              {
+                "time": 0,
+                "T": 350.14385776281114,
+                "V": 0.39999999999943714
+              }
+            ]
+          }
+        ],
+        "elapsedMs": 911.4507940000001
+      }
+    ],
+    "thermal": [
+      {
+        "case": null,
+        "nodes": 1195,
+        "elements": 2260,
+        "minQuality": 0.6351622422070774,
+        "meanQuality": 0.9862641704522668,
+        "frames": 1,
+        "summary": {
+          "temperature": {
+            "min": 293.15,
+            "max": 373.15
+          },
+          "potential": {
+            "min": 0,
+            "max": 0
+          },
+          "joulePower": 0,
+          "electricEnergy": 0,
+          "maxHeatFlux": 8000.0029019575095,
+          "maxElectricField": 0
+        },
+        "nonlinear": {
+          "iterations": 1,
+          "residual": 0,
+          "change": 0
+        },
+        "linearIterations": 132,
+        "maxAcceptedLinearResidual": 9.088092553198913e-10,
+        "lastSolves": [
+          {
+            "label": "Heat transfer",
+            "source": 0,
+            "inwardFlux": 0,
+            "essentialReaction": -1.1652602632805653e-8,
+            "convectionOut": 0,
+            "storage": 0,
+            "balance": -1.1652602632805653e-8,
+            "freeResidualSum": 1.1652840692377708e-8,
+            "relativeResidual": 9.088092553198913e-10,
+            "dofs": 1145,
+            "nonzeros": 7745
+          }
+        ],
+        "probes": [
+          {
+            "id": "probe0",
+            "name": "Midpoint",
+            "x": 0.05,
+            "y": 0.03,
+            "samples": [
+              {
+                "time": 0,
+                "T": 333.14999925736544,
+                "V": null
+              }
+            ]
+          }
+        ],
+        "elapsedMs": 165.32719199999997
+      }
+    ],
+    "capacitor": [
+      {
+        "case": null,
+        "nodes": 1195,
+        "elements": 2260,
+        "minQuality": 0.6351622422070774,
+        "meanQuality": 0.9862641704522668,
+        "frames": 1,
+        "summary": {
+          "temperature": {
+            "min": 0,
+            "max": 0
+          },
+          "potential": {
+            "min": 0,
+            "max": 10
+          },
+          "joulePower": 0,
+          "electricEnergy": 1.0625025375360028e-12,
+          "maxHeatFlux": 0,
+          "maxElectricField": 100.00000308428457
+        },
+        "nonlinear": {
+          "iterations": 1,
+          "residual": 0,
+          "change": 0
+        },
+        "linearIterations": 140,
+        "maxAcceptedLinearResidual": 9.446563974138446e-10,
+        "lastSolves": [
+          {
+            "label": "Electrostatics",
+            "source": 0,
+            "inwardFlux": 0,
+            "essentialReaction": -9.121756419251604e-23,
+            "convectionOut": 0,
+            "storage": 0,
+            "balance": -9.121756419251604e-23,
+            "freeResidualSum": 9.121485879404158e-23,
+            "relativeResidual": 9.446563974138446e-10,
+            "dofs": 1145,
+            "nonzeros": 7745
+          }
+        ],
+        "probes": [
+          {
+            "id": "probe0",
+            "name": "Midpoint",
+            "x": 0.05,
+            "y": 0.03,
+            "samples": [
+              {
+                "time": 0,
+                "T": null,
+                "V": 4.9999999744248615
+              }
+            ]
+          }
+        ],
+        "elapsedMs": 162.95117499999992
+      }
+    ],
+    "transient": [
+      {
+        "case": null,
+        "nodes": 1195,
+        "elements": 2260,
+        "minQuality": 0.6351622422070774,
+        "meanQuality": 0.9862641704522668,
+        "frames": 21,
+        "summary": {
+          "temperature": {
+            "min": 293.15,
+            "max": 373.15
+          },
+          "potential": {
+            "min": 0,
+            "max": 0
+          },
+          "joulePower": 0,
+          "electricEnergy": 0,
+          "maxHeatFlux": 20293.046962315566,
+          "maxElectricField": 0
+        },
+        "nonlinear": {
+          "iterations": 1,
+          "residual": 0,
+          "change": 0
+        },
+        "linearIterations": 798,
+        "maxAcceptedLinearResidual": 9.73205677533371e-10,
+        "lastSolves": [
+          {
+            "label": "Heat transfer · t=200.0 s",
+            "source": 0,
+            "inwardFlux": 0,
+            "essentialReaction": 1.1956415174085175,
+            "convectionOut": 0,
+            "storage": 1.1956414260266168,
+            "balance": 9.138190071311669e-8,
+            "freeResidualSum": -9.138170278810698e-8,
+            "relativeResidual": 9.73205677533371e-10,
+            "dofs": 1145,
+            "nonzeros": 7745
+          }
+        ],
+        "probes": [
+          {
+            "id": "probe0",
+            "name": "Midpoint",
+            "x": 0.05,
+            "y": 0.03,
+            "samples": [
+              {
+                "time": 0,
+                "T": 293.15,
+                "V": null
+              },
+              {
+                "time": 10,
+                "T": 293.1539447965304,
+                "V": null
+              },
+              {
+                "time": 20,
+                "T": 293.17374612526623,
+                "V": null
+              },
+              {
+                "time": 30,
+                "T": 293.22819186753236,
+                "V": null
+              },
+              {
+                "time": 40,
+                "T": 293.33759903065567,
+                "V": null
+              },
+              {
+                "time": 50,
+                "T": 293.51828186181183,
+                "V": null
+              },
+              {
+                "time": 60,
+                "T": 293.77952198517545,
+                "V": null
+              },
+              {
+                "time": 70,
+                "T": 294.12328293779797,
+                "V": null
+              },
+              {
+                "time": 80,
+                "T": 294.5456316353193,
+                "V": null
+              },
+              {
+                "time": 90,
+                "T": 295.0387373240284,
+                "V": null
+              },
+              {
+                "time": 100,
+                "T": 295.5927271560088,
+                "V": null
+              },
+              {
+                "time": 110,
+                "T": 296.19709804925526,
+                "V": null
+              },
+              {
+                "time": 120,
+                "T": 296.8416492136273,
+                "V": null
+              },
+              {
+                "time": 130,
+                "T": 297.5170176681098,
+                "V": null
+              },
+              {
+                "time": 140,
+                "T": 298.21492980032906,
+                "V": null
+              },
+              {
+                "time": 150,
+                "T": 298.92826884212576,
+                "V": null
+              },
+              {
+                "time": 160,
+                "T": 299.6510341384711,
+                "V": null
+              },
+              {
+                "time": 170,
+                "T": 300.3782439752773,
+                "V": null
+              },
+              {
+                "time": 180,
+                "T": 301.1058148044091,
+                "V": null
+              },
+              {
+                "time": 190,
+                "T": 301.83043631489215,
+                "V": null
+              },
+              {
+                "time": 200,
+                "T": 302.54945295379855,
+                "V": null
+              }
+            ]
+          }
+        ],
+        "elapsedMs": 730.389488
+      }
+    ],
+    "sweep": [
+      {
+        "case": {
+          "name": "Vapp",
+          "expression": "0.4[V]",
+          "value": 0.4
+        },
+        "nodes": 1157,
+        "elements": 2140,
+        "minQuality": 0.4762554177146849,
+        "meanQuality": 0.9654270640243647,
+        "frames": 1,
+        "summary": {
+          "temperature": {
+            "min": 293.15,
+            "max": 307.9912736162465
+          },
+          "potential": {
+            "min": 0,
+            "max": 0.4
+          },
+          "joulePower": 1.1290723625048036,
+          "electricEnergy": 4.143329246281252e-16,
+          "maxHeatFlux": 10066.385175579084,
+          "maxElectricField": 8.370859979421862
+        },
+        "nonlinear": {
+          "iterations": 9,
+          "residual": 8.283864626677365e-10,
+          "change": 0
+        },
+        "linearIterations": 866,
+        "maxAcceptedLinearResidual": 9.837523771198716e-10,
+        "lastSolves": [
+          {
+            "label": "Electric currents · Picard 9",
+            "source": 0,
+            "inwardFlux": 0,
+            "essentialReaction": 9.676703882632864e-13,
+            "convectionOut": 0,
+            "storage": 0,
+            "balance": 9.676703882632864e-13,
+            "freeResidualSum": -8.229562864503492e-13,
+            "relativeResidual": 8.283864626677365e-10,
+            "dofs": 1107,
+            "nonzeros": 7395
+          },
+          {
+            "label": "Heat transfer · Picard 9",
+            "source": 1.1290723625048056,
+            "inwardFlux": 0,
+            "essentialReaction": -1.1290713358948932,
+            "convectionOut": 0,
+            "storage": 0,
+            "balance": 0.0000010266099124134342,
+            "freeResidualSum": -0.000001026608970129982,
+            "relativeResidual": 6.918340805261018e-10,
+            "dofs": 1107,
+            "nonzeros": 7395
+          }
+        ],
+        "probes": [
+          {
+            "id": "probe0",
+            "name": "Center bridge",
+            "x": 0.05,
+            "y": 0.03,
+            "samples": [
+              {
+                "time": 0,
+                "T": 307.9906336593939,
+                "V": 0.19999999999992787
+              }
+            ]
+          }
+        ],
+        "elapsedMs": 768.7291949999999
+      },
+      {
+        "case": {
+          "name": "Vapp",
+          "expression": "0.6[V]",
+          "value": 0.6
+        },
+        "nodes": 1157,
+        "elements": 2140,
+        "minQuality": 0.4762554177146849,
+        "meanQuality": 0.9654270640243647,
+        "frames": 1,
+        "summary": {
+          "temperature": {
+            "min": 293.15,
+            "max": 325.96157143292237
+          },
+          "potential": {
+            "min": 0,
+            "max": 0.6
+          },
+          "joulePower": 2.482307972873187,
+          "electricEnergy": 9.335799301126977e-16,
+          "maxHeatFlux": 22145.31701913165,
+          "maxElectricField": 12.61564563788598
+        },
+        "nonlinear": {
+          "iterations": 9,
+          "residual": 9.545908286281144e-10,
+          "change": 0
+        },
+        "linearIterations": 901,
+        "maxAcceptedLinearResidual": 9.979501555965054e-10,
+        "lastSolves": [
+          {
+            "label": "Electric currents · Picard 9",
+            "source": 0,
+            "inwardFlux": 0,
+            "essentialReaction": 1.3599343873238467e-11,
+            "convectionOut": 0,
+            "storage": 0,
+            "balance": 1.3599343873238467e-11,
+            "freeResidualSum": -1.3298254858407077e-11,
+            "relativeResidual": 9.545908286281144e-10,
+            "dofs": 1107,
+            "nonzeros": 7395
+          },
+          {
+            "label": "Heat transfer · Picard 9",
+            "source": 2.4823079728731785,
+            "inwardFlux": 0,
+            "essentialReaction": -2.4823074596077435,
+            "convectionOut": 0,
+            "storage": 0,
+            "balance": 5.13265435042598e-7,
+            "freeResidualSum": -5.132648272914101e-7,
+            "relativeResidual": 8.440219813768965e-10,
+            "dofs": 1107,
+            "nonzeros": 7395
+          }
+        ],
+        "probes": [
+          {
+            "id": "probe0",
+            "name": "Center bridge",
+            "x": 0.05,
+            "y": 0.03,
+            "samples": [
+              {
+                "time": 0,
+                "T": 325.96014974181116,
+                "V": 0.2999999999997607
+              }
+            ]
+          }
+        ],
+        "elapsedMs": 708.6761159999996
+      },
+      {
+        "case": {
+          "name": "Vapp",
+          "expression": "0.8[V]",
+          "value": 0.8
+        },
+        "nodes": 1157,
+        "elements": 2140,
+        "minQuality": 0.4762554177146849,
+        "meanQuality": 0.9654270640243647,
+        "frames": 1,
+        "summary": {
+          "temperature": {
+            "min": 293.15,
+            "max": 350.1463423466612
+          },
+          "potential": {
+            "min": 0,
+            "max": 0.8
+          },
+          "joulePower": 4.28151676128702,
+          "electricEnergy": 1.6631533792710395e-15,
+          "maxHeatFlux": 38227.2843246156,
+          "maxElectricField": 16.921642528671132
+        },
+        "nonlinear": {
+          "iterations": 9,
+          "residual": 9.534861119832824e-10,
+          "change": 0
+        },
+        "linearIterations": 937,
+        "maxAcceptedLinearResidual": 9.656113531551772e-10,
+        "lastSolves": [
+          {
+            "label": "Electric currents · Picard 9",
+            "source": 0,
+            "inwardFlux": 0,
+            "essentialReaction": 3.44058115331336e-11,
+            "convectionOut": 0,
+            "storage": 0,
+            "balance": 3.44058115331336e-11,
+            "freeResidualSum": -3.426398748063164e-11,
+            "relativeResidual": 9.534861119832824e-10,
+            "dofs": 1107,
+            "nonzeros": 7395
+          },
+          {
+            "label": "Heat transfer · Picard 9",
+            "source": 4.281516761287028,
+            "inwardFlux": 0,
+            "essentialReaction": -4.281517831194086,
+            "convectionOut": 0,
+            "storage": 0,
+            "balance": -0.0000010699070580599823,
+            "freeResidualSum": 0.0000010699078186617283,
+            "relativeResidual": 7.464477779550675e-10,
+            "dofs": 1107,
+            "nonzeros": 7395
+          }
+        ],
+        "probes": [
+          {
+            "id": "probe0",
+            "name": "Center bridge",
+            "x": 0.05,
+            "y": 0.03,
+            "samples": [
+              {
+                "time": 0,
+                "T": 350.14385776281114,
+                "V": 0.39999999999943714
+              }
+            ]
+          }
+        ],
+        "elapsedMs": 699.6832490000002
+      },
+      {
+        "case": {
+          "name": "Vapp",
+          "expression": "1[V]",
+          "value": 1
+        },
+        "nodes": 1157,
+        "elements": 2140,
+        "minQuality": 0.4762554177146849,
+        "meanQuality": 0.9654270640243647,
+        "frames": 1,
+        "summary": {
+          "temperature": {
+            "min": 293.15,
+            "max": 379.7771400748292
+          },
+          "potential": {
+            "min": 0,
+            "max": 1
+          },
+          "joulePower": 6.454912870086224,
+          "electricEnergy": 2.6058211320233485e-15,
+          "maxHeatFlux": 57685.340366400094,
+          "maxElectricField": 21.31005440910799
+        },
+        "nonlinear": {
+          "iterations": 9,
+          "residual": 9.916142377830117e-10,
+          "change": 0
+        },
+        "linearIterations": 961,
+        "maxAcceptedLinearResidual": 9.916142377830117e-10,
+        "lastSolves": [
+          {
+            "label": "Electric currents · Picard 9",
+            "source": 0,
+            "inwardFlux": 0,
+            "essentialReaction": 3.6272318482133414e-11,
+            "convectionOut": 0,
+            "storage": 0,
+            "balance": 3.6272318482133414e-11,
+            "freeResidualSum": -3.574426171715217e-11,
+            "relativeResidual": 8.454878485901821e-10,
+            "dofs": 1107,
+            "nonzeros": 7395
+          },
+          {
+            "label": "Heat transfer · Picard 9",
+            "source": 6.454912870086228,
+            "inwardFlux": 0,
+            "essentialReaction": -6.454916082099785,
+            "convectionOut": 0,
+            "storage": 0,
+            "balance": -0.000003212013556463944,
+            "freeResidualSum": 0.000003212014290161877,
+            "relativeResidual": 9.916142377830117e-10,
+            "dofs": 1107,
+            "nonzeros": 7395
+          }
+        ],
+        "probes": [
+          {
+            "id": "probe0",
+            "name": "Center bridge",
+            "x": 0.05,
+            "y": 0.03,
+            "samples": [
+              {
+                "time": 0,
+                "T": 379.77333777351816,
+                "V": 0.4999999999990378
+              }
+            ]
+          }
+        ],
+        "elapsedMs": 707.3051979999991
+      }
+    ]
+  }
+}

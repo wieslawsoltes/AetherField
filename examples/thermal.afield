@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "id": "aetherfield-example-thermal",
+  "name": "Thermal conduction slab",
+  "parameters": [
+    {
+      "name": "Vapp",
+      "expression": "10[V]"
+    },
+    {
+      "name": "T0",
+      "expression": "293.15[K]"
+    }
+  ],
+  "shapes": [
+    {
+      "id": "plate",
+      "name": "Domain",
+      "type": "rectangle",
+      "operation": "add",
+      "material": "alloy",
+      "x": "0",
+      "y": "0",
+      "width": "100[mm]",
+      "height": "60[mm]"
+    }
+  ],
+  "materials": [
+    {
+      "id": "alloy",
+      "name": "Homogeneous material · illustrative",
+      "k": "10[W/(m*K)]",
+      "rho": "7800[kg/m^3]",
+      "cp": "500[J/(kg*K)]",
+      "sigma": "100[S/m]",
+      "epsilonR": "4",
+      "alpha": "0",
+      "Tref": "T0",
+      "color": "#769db1"
+    }
+  ],
+  "physics": {
+    "mode": "heat",
+    "thickness": "1[mm]",
+    "heatSource": "0[W/m^3]",
+    "spaceCharge": "0[C/m^3]",
+    "initial": "T0"
+  },
+  "boundaries": [
+    {
+      "id": "bcL",
+      "selector": "left",
+      "name": "Terminal / heat sink",
+      "heat": {
+        "type": "temperature",
+        "value": "373.15[K]",
+        "h": "10[W/(m^2*K)]",
+        "ambient": "T0"
+      },
+      "electric": {
+        "type": "potential",
+        "value": "Vapp"
+      }
+    },
+    {
+      "id": "bcR",
+      "selector": "right",
+      "name": "Ground / heat sink",
+      "heat": {
+        "type": "temperature",
+        "value": "T0",
+        "h": "10[W/(m^2*K)]",
+        "ambient": "T0"
+      },
+      "electric": {
+        "type": "potential",
+        "value": "0[V]"
+      }
+    }
+  ],
+  "mesh": {
+    "size": "2.5[mm]",
+    "maxNodes": 18000
+  },
+  "study": {
+    "type": "stationary",
+    "dt": "0.5[s]",
+    "end": "10[s]",
+    "tolerance": 1e-9,
+    "maxIterations": 3500,
+    "nonlinearTolerance": 1e-7,
+    "maxNonlinear": 70,
+    "relaxation": 0.8,
+    "backend": "auto",
+    "sweep": {
+      "enabled": false,
+      "parameter": "Vapp",
+      "values": "0.4[V], 0.6[V], 0.8[V], 1[V]"
+    }
+  },
+  "probes": [
+    {
+      "id": "probe0",
+      "name": "Midpoint",
+      "x": 0.05,
+      "y": 0.03
+    }
+  ],
+  "view": {
+    "field": "temperature",
+    "mesh": false,
+    "contours": true,
+    "vectors": false
+  }
+}
