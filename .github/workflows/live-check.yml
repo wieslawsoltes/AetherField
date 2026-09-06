@@ -1,0 +1,82 @@
+name: Verify published AetherField
+
+on:
+  workflow_run:
+    workflows: ['Verify and deploy AetherField']
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: aetherfield-live-site-check
+  cancel-in-progress: true
+
+jobs:
+  live:
+    name: Check public HTTPS application and computed results
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SITE_URL: https://wieslawsoltes.github.io/AetherField/
+      EXPECTED_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Confirm the deployed commit and static resources
+        run: |
+          python - <<'PY'
+          import json,os,time,urllib.request
+          base=os.environ['SITE_URL']
+          expected=os.environ['EXPECTED_SHA']
+          for attempt in range(36):
+              try:
+                  req=urllib.request.Request(base+'build.json?commit='+expected,headers={'Cache-Control':'no-cache'})
+                  with urllib.request.urlopen(req,timeout=20) as response:
+                      build=json.load(response)
+                  if build['commit']==expected:
+                      print('LIVE BUILD:',json.dumps(build),flush=True)
+                      break
+                  print('CDN has another revision; retrying',flush=True)
+              except Exception as error:
+                  print('Publication check:',str(error),flush=True)
+              time.sleep(5)
+          else:
+              raise SystemExit('The requested commit was not served by GitHub Pages')
+          for resource in ['', 'app.js','styles.css','core/worker.js','core/fem.js','core/gpu.js','view/renderer.js','examples/heater.afield','AetherField-standalone.html','tests/gpu-check.html']:
+              with urllib.request.urlopen(base+resource,timeout=30) as response:
+                  assert response.status==200,resource
+                  assert len(response.read())>0,resource
+              print('HTTP 200:',resource or 'index.html',flush=True)
+          PY
+      - name: Install browser test runner
+        run: |
+          python -m pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium
+      - name: Execute the full browser suite against the live Pages URL
+        run: |
+          CHROMIUM="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+          python tests/browser.py --chromium "$CHROMIUM" --url "$SITE_URL"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          report=json.loads(Path('tests/browser-results.json').read_text())
+          assert report['passed']==11 and report['total']==11,report
+          assert not report['pageErrors'],report['pageErrors']
+          assert report['environment']['secureContext'] is True,report['environment']
+          print('LIVE BROWSER RESULTS:',json.dumps(report,indent=2))
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as summary:
+              summary.write('# Published AetherField verified\n\n')
+              summary.write('Site: '+os.environ['SITE_URL']+'\n\n')
+              summary.write('Commit: `'+os.environ['EXPECTED_SHA']+'`\n\n')
+              summary.write('**11/11 live browser checks passed; zero page errors.**\n\n')
+              summary.write('```json\n'+json.dumps(report,indent=2)+'\n```\n')
+          PY
